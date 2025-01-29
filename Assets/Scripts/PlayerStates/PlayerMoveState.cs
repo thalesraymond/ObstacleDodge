@@ -16,8 +16,14 @@ namespace PlayerStates
         public override void Update()
         {
             base.Update();
+            
+            var airVelocity = this.Player.Rigidbody.linearVelocity.y;
 
-            this.Player.transform.Translate(new Vector3(this.InputManager.MoveInput.x, 0, this.InputManager.MoveInput.y) * (this.Player.MovementSpeed * Time.deltaTime));
+            var velocityMultiplier = (this.Player.MovementSpeed * Time.deltaTime);
+            
+            var inputVectorDirection = new Vector3(this.InputManager.MoveInput.x * velocityMultiplier, airVelocity, this.InputManager.MoveInput.y * velocityMultiplier);
+            
+            this.Player.Rigidbody.AddForce(inputVectorDirection);
             
             if(!this.InputManager.IsTryingToMove)
                 this.StateMachine.ChangeState(this.Player.IdleState);

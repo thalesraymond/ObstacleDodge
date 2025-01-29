@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float movementSpeed  = 5f;
-    
+    public Rigidbody Rigidbody { get; private set; }
     public float MovementSpeed => this.movementSpeed;
     
     public PlayerStateMachine StateMachine { get; private set; }
@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     
     private void Start()
     {
+        this.Rigidbody = GetComponent<Rigidbody>();
+        
         this.StateMachine.Initialize(this.IdleState);
     }
 

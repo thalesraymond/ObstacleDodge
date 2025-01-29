@@ -12,7 +12,7 @@ namespace PlayerStates
         {
             base.Enter();
 
-            this.Player.transform.Translate(Vector3.zero);
+            this.Player.Rigidbody.AddForce(Vector3.zero);
         }
 
         public override void Update()
